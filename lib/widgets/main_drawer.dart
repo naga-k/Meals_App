@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app/screens/filters_screen.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key? key}) : super(key: key);
 
-  Widget buildListTile(String title, IconData iconData){
+  Widget buildListTile(String title, IconData iconData, Function() changeScreen){
     return ListTile(
       leading: Icon(
         iconData,
@@ -17,7 +18,7 @@ class MainDrawer extends StatelessWidget {
             fontWeight: FontWeight.bold
         ) ,
       ),
-      onTap: () {} ,
+      onTap: changeScreen,
     );
   }
 
@@ -45,11 +46,19 @@ class MainDrawer extends StatelessWidget {
             height: 20,
           ),
           buildListTile(
-              'Meals',
-              Icons.restaurant),
+            'Meals',
+            Icons.restaurant,
+                  (){
+              Navigator.of(context).pushReplacementNamed('/');
+              }
+          ),
           buildListTile(
               'Filters',
-              Icons.settings)
+              Icons.settings,
+              (){
+                Navigator.of(context).pushReplacementNamed(FiltersScreen.routeName);
+              }
+          ),
         ],
       ),
     );
