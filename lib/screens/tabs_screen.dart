@@ -49,45 +49,17 @@ class _TabsScreenState extends State<TabsScreen> {
           items: [
             BottomNavigationBarItem(
               backgroundColor: Theme.of(context).colorScheme.primary,
-              icon: Icon(Icons.category),
+              icon: const Icon(Icons.category),
               label: 'Categories'
             ),
             BottomNavigationBarItem(
               backgroundColor: Theme.of(context).colorScheme.primary,
-                icon: Icon(Icons.star),
+                icon: const Icon(Icons.star),
                 label: 'Favourites'
             )
           ],
         ),
       )
-
-      // child: Scaffold(
-      //   appBar: AppBar(
-      //     title: Text('Meals'),
-      //     bottom: const TabBar(
-      //       tabs: [
-      //         Tab(
-      //           icon: Icon(
-      //             Icons.category
-      //           ),
-      //           text: 'Categories',
-      //         ),
-      //         Tab(
-      //           icon: Icon(
-      //             Icons.star,
-      //           ),
-      //           text: 'Favourites',
-      //         )
-      //       ],
-      //     ),
-      //   ),
-      //   body: const TabBarView(
-      //     children: [
-      //       CategoriesScreen(),
-      //       FavoritesScreen()
-      //     ],
-      //   ),
-      // ),
     );
   }
 }
