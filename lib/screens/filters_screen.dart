@@ -4,17 +4,28 @@ import 'package:meals_app/widgets/main_drawer.dart';
 class FiltersScreen extends StatefulWidget {
 
   static const routeName = '/filters';
-  const FiltersScreen({Key? key}) : super(key: key);
+  final Map<String, bool> currentFilters;
+  final void Function(Map<String, bool> fliters) saveFilters;
+  const FiltersScreen({Key? key, required this.saveFilters, required this.currentFilters}) : super(key: key);
 
   @override
   State<FiltersScreen> createState() => _FiltersScreenState();
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
-  bool _glutenFree = false;
-  bool _vegetarian = false;
-  bool _vegan = false;
-  bool _lactoseFree = false;
+  late bool _glutenFree;
+  late bool _vegetarian ;
+  late bool _vegan;
+  late bool _lactoseFree;
+
+  @override
+  void initState(){
+    super.initState();
+  _glutenFree = widget.currentFilters['gluten'] as bool;
+  _vegetarian = widget.currentFilters['vegetarian'] as bool;
+  _vegan = widget.currentFilters['vegan'] as bool;
+  _lactoseFree = widget.currentFilters['lactose'] as bool;
+}
 
   Widget _buildSwitchListTile({
     required String title,
@@ -34,13 +45,26 @@ class _FiltersScreenState extends State<FiltersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Filters'),
+        title: const Text('Your Filters'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Map<String, bool> filters = {
+                  'gluten' : _glutenFree,
+                  'lactose' : _lactoseFree,
+                  'vegan' : _vegan,
+                  'vegetarian' : _vegetarian,
+                };
+
+                widget.saveFilters(filters);},
+              icon:const Icon(Icons.save))
+        ],
       ),
-      drawer: MainDrawer(),
+      drawer: const MainDrawer(),
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Text(
               'Adjust your meal selection',
               style: Theme.of(context).textTheme.subtitle2,
